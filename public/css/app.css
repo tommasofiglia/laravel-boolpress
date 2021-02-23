@@ -10944,3 +10944,42 @@ a.text-dark:focus {
   }
 }
 
+.d-flex {
+  display: flex;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+td,
+th {
+  padding: 10px;
+  border: 1px solid black;
+}
+
+table {
+  border: 1px solid black;
+}
+
+.btn {
+  margin: 5px;
+}
+
+nav {
+  height: 100px;
+  background-color: black;
+  margin-bottom: 100px;
+}
+
+nav .container {
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
