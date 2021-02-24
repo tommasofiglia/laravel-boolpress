@@ -19,4 +19,6 @@ Route::get('contacts', 'PageController@contacts')->name('contacts');
 Route::get('about', 'PageController@about')->name('about');
 
 //Resource routes
-Route::resource('posts', 'PostController');
+Route::resource('tags', 'TagController');
+Route::resource('articles', 'ArticleController');
+Route::resource('categories', 'CategoryController');
