@@ -18,11 +18,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-// Questa route ci manderà all'indirizzo api/posts
-Route::get('posts', function()
-{
-  return response()->json([
-    // Qui ci va un array
-  ]);
-
-});
+Route::get('articles' , 'API\BlogController@articles');
+Route::get('tags' , 'API\BlogController@tags');
+Route::get('categories' , 'API\BlogController@categories');
