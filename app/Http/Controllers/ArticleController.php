@@ -14,7 +14,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        $articles = Article::latest()->get();
+
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -35,7 +38,20 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          //Request può avere una validazione
+        $request->validate([
+          'title' =>'required|unique:posts|max:255',
+          'body' =>'required',
+        ]);
+
+
+        $article = Article::orderBy('id', 'desc')->first();
+        $article = new Article;
+        $article->title = request('title');
+        $article->body = request('body');
+        $article->save();
+
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -47,6 +63,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         //
+        return view('articles.showpost', compact('article'));
     }
 
     /**
@@ -57,7 +74,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit',compact('article'));
     }
 
     /**
@@ -69,7 +86,10 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+      $articles = $request->all();
+      $article->update($articles);
+
+      return redirect()->route('articles.index', $article);
     }
 
     /**
@@ -80,6 +100,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('articles.index');
     }
 }

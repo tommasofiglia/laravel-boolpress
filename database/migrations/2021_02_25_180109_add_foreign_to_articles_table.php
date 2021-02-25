@@ -14,9 +14,12 @@ class AddForeignToArticlesTable extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
+
+          // Aggiunta della foreign key per collegare il category_id all'id degli elementi in category
           $table->unsignedBigInteger('category_id')->after('id')->nullable();
           $table->foreign('category_id')->references('id')->on('categories');
 
+          // Aggiunta della foreign key per collegare il tag_id all'id degli elementi in tag
           $table->unsignedBigInteger('tag_id')->after('id')->nullable();
           $table->foreign('tag_id')->references('id')->on('tags');
         });
