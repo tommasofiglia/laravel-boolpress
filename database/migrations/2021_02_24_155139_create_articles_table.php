@@ -18,8 +18,17 @@ class CreateArticlesTable extends Migration
             $table->string('author');
             $table->string('title');
             $table->text('body');
-            $table->string('category');
-            $table->string('tags');
+
+            // migration per le due foreign key
+            // $table->foreignId('tag_id')
+            // ->constrained();
+
+            // $table->foreignId('category_id')
+            // ->constrained();
+
+            // $table->string('category');
+            // $table->string('tags');
+
             $table->timestamps();
         });
     }
