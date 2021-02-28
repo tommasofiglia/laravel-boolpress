@@ -20,7 +20,5 @@ Route::get('about', 'PageController@about')->name('about');
 
 //Resource routes
 Route::resource('articles', 'ArticleController');
-
 Route::resource('tags', 'TagController');
-Route::resource('articles', 'ArticleController');
 Route::resource('categories', 'CategoryController');
