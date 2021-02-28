@@ -20,7 +20,6 @@ class ArticleSeeder extends Seeder
         $newArticle->body = $faker->realText($maxNbChars = 250, $indexSize = 1);
         $newArticle->category_id = $faker->numberBetween(1, 20);
         $newArticle->tag_id = $faker->numberBetween(1, 80);
-
         $newArticle->save();
       }
     }

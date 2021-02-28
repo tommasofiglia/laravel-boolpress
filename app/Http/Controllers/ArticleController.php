@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Tag;
+use App\Category;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,8 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
-        $articles = Article::latest()->get();
+        $articles = Article::orderBy('id', 'desc')->get();
 
         return view('articles.index', compact('articles'));
     }
@@ -27,7 +28,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('articles.newarticle', compact('tags', 'categories'));
     }
 
     /**
@@ -39,17 +42,16 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
           //Request può avere una validazione
-        $request->validate([
-          'title' =>'required|unique:posts|max:255',
+        $validateArticle=$request->validate([
+          'title' =>'required|unique:articles|max:255',
           'body' =>'required',
+          'author' => 'required',
+          'tag_id' => 'required',
+          'category_id' => 'required'
         ]);
 
-
+        Article::create($validateArticle);
         $article = Article::orderBy('id', 'desc')->first();
-        $article = new Article;
-        $article->title = request('title');
-        $article->body = request('body');
-        $article->save();
 
         return redirect()->route('articles.index');
     }
@@ -63,7 +65,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         //
-        return view('articles.showpost', compact('article'));
+        return view('articles.showarticle', compact('article'));
     }
 
     /**
@@ -74,7 +76,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.edit',compact('article'));
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('articles.edit',compact('article', 'tags', 'categories'));
     }
 
     /**
